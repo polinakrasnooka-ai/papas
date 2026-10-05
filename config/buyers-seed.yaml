@@ -1,0 +1,315 @@
+# Seed-список крупных потенциальных покупателей известняка
+# в странах первого приоритета. ЭТО НЕ ЛИДЫ — это стартовый список для
+# ресёрча. Каждого кандидата агент должен проверить по полному чеклисту:
+# активная закупка, допуск иностранных поставщиков, логистика, контакт.
+# Публичная информация, уровень Tier проставлен как гипотеза.
+#
+# Как использовать: `limestone-leads` агент читает этот файл в начале
+# сессии, если пользователь не указал конкретную компанию.
+
+poland:
+  power:
+    - name: "PGE Group"
+      sites: ["Elektrownia Bełchatów", "Elektrownia Turów", "Elektrownia Opole"]
+      portal: "https://swpp2.gkpge.pl/"
+      note: "Крупнейший лигнитный ТЭК в ЕС, FGD-sorbent потребитель."
+    - name: "Tauron Group"
+      sites: ["Elektrownia Jaworzno III", "Elektrownia Łagisza"]
+      portal: "https://swoz.tauron.pl/"
+    - name: "Enea"
+      sites: ["Elektrownia Kozienice", "Elektrownia Połaniec"]
+      portal: "https://zakupy.enea.pl/"
+    - name: "ZE PAK"
+      sites: ["Elektrownia Pątnów"]
+      portal: "https://www.zepak.com.pl/"
+  steel:
+    - name: "ArcelorMittal Poland"
+      sites: ["Dąbrowa Górnicza", "Kraków", "Sosnowiec"]
+      note: "Крупнейший потребитель flux limestone в регионе."
+  cement:
+    - name: "Heidelberg Materials Polska"
+      sites: ["Górażdże", "Ekocem (Nowiny)"]
+      portal: "https://www.heidelbergmaterials.pl/"
+    - name: "Lafarge Cement Polska (Holcim)"
+      sites: ["Małogoszcz", "Kujawy"]
+    - name: "Cemex Polska"
+      sites: ["Chełm", "Rudniki"]
+    - name: "CRH Polska / Rudniki"
+      sites: ["Ożarów", "Rejowiec"]
+  chem:
+    - name: "Grupa Azoty"
+      sites: ["Puławy", "Tarnów", "Police"]
+      portal: "https://platformazakupowa.pl/pn/grupaazoty"
+  sugar:
+    - name: "Krajowa Spółka Cukrowa (Polski Cukier)"
+      sites: ["Nakło", "Werbkowice", "Dobrzelin"]
+      note: "Сезонная карбонатация, высокая чистота CaCO3."
+    - name: "Pfeifer & Langen Polska"
+      sites: ["Gostyń", "Środa Wielkopolska"]
+    - name: "Südzucker Polska"
+      sites: ["Ropczyce", "Strzyżów"]
+
+romania:
+  power:
+    - name: "Complexul Energetic Oltenia"
+      sites: ["Rovinari", "Turceni", "Craiova II", "Ișalnița"]
+      portal: "https://www.ceoltenia.ro/furnizori/"
+      note: "Лигнитный ТЭК, FGD-sorbent."
+  steel:
+    - name: "Liberty Galați"
+      sites: ["Galați"]
+      note: "Доменное производство, flux limestone. Проверить sanction compliance."
+    - name: "ArcelorMittal Hunedoara"
+      sites: ["Hunedoara"]
+  cement:
+    - name: "Holcim Romania"
+      sites: ["Câmpulung", "Aleșd", "Turda"]
+    - name: "Heidelberg Materials Romania (ex-CRH, ex-Carpatcement)"
+      sites: ["Fieni", "Deva", "Chișcădaga", "Tașca", "Hoghiz"]
+    - name: "CRH Ciment"
+  chem:
+    - name: "Chimcomplex (Borzești, Râmnicu Vâlcea)"
+    - name: "Oltchim (now part of Chimcomplex)"
+  sugar:
+    - name: "Agrana Romania"
+      sites: ["Buzău", "Roman"]
+
+slovakia:
+  power:
+    - name: "Slovenské elektrárne"
+      sites: ["Vojany", "Nováky"]
+      portal: "https://www.seas.sk/dodavatelia"
+  steel:
+    - name: "U. S. Steel Košice"
+      sites: ["Košice"]
+      portal: "https://www.usske.sk/sk/dodavatelia"
+      note: "Крупнейший потребитель flux limestone в SK."
+  cement:
+    - name: "CRH Slovakia"
+      sites: ["Rohožník", "Turňa nad Bodvou"]
+    - name: "Považská cementáreň (CRH)"
+      sites: ["Ladce"]
+    - name: "Cemmac"
+      sites: ["Horné Srnie"]
+
+hungary:
+  power:
+    - name: "MVM Mátra Energia (ex Mátrai Erőmű)"
+      sites: ["Visonta", "Bükkábrány"]
+      portal: "https://www.mert.hu/"
+      note: "Лигнитный, FGD-sorbent, недавняя модернизация."
+  steel:
+    - name: "ISD Dunaferr / Liberty Dunaújváros"
+      sites: ["Dunaújváros"]
+      note: "Проверить текущий статус (bankruptcy proceedings)."
+  cement:
+    - name: "Duna-Dráva Cement (HeidelbergCement)"
+      sites: ["Vác", "Beremend"]
+    - name: "CRH Magyarország"
+      sites: ["Királyegyháza"]
+  chem:
+    - name: "Nitrogénművek"
+      sites: ["Pétfürdő"]
+  sugar:
+    - name: "Magyar Cukor (Agrana)"
+      sites: ["Kaposvár"]
+
+moldova:
+  power:
+    - name: "Termoelectrica (CET-1, CET-2 Chișinău)"
+      sites: ["Chișinău"]
+    - name: "CET Nord"
+      sites: ["Bălți"]
+  cement:
+    - name: "Lafarge Ciment (Moldova) — Rezina"
+      sites: ["Rezina"]
+      note: "Географически ближайший сосед Украины — приоритет."
+  sugar:
+    - name: "Südzucker Moldova"
+      sites: ["Drochia", "Fălești"]
+
+czech_republic:
+  power:
+    - name: "ČEZ Group"
+      sites: ["Ledvice", "Prunéřov II", "Tušimice II", "Mělník"]
+      portal: "https://www.cez.cz/cs/pro-dodavatele"
+    - name: "Sev.en Energy (ex Litvínovská uhelná)"
+      sites: ["Chvaletice", "Počerady"]
+  steel:
+    - name: "Třinecké železárny"
+      sites: ["Třinec"]
+      portal: "https://www.trz.cz/dodavatele"
+    - name: "Liberty Ostrava"
+      sites: ["Ostrava-Kunčice"]
+      note: "Проверить операционный статус."
+    - name: "Vítkovice Steel"
+      sites: ["Ostrava-Vítkovice"]
+  cement:
+    - name: "Českomoravský cement (Heidelberg)"
+      sites: ["Mokrá", "Radotín"]
+    - name: "Lafarge Cement CZ"
+      sites: ["Čížkovice"]
+    - name: "Cemex CZ"
+      sites: ["Prachovice"]
+  sugar:
+    - name: "Tereos TTD"
+      sites: ["Dobrovice", "České Meziříčí"]
+
+austria:
+  power:
+    - name: "Verbund"
+      sites: ["Mellach (GAS, но есть истории с angelauferen Blöcke)"]
+      portal: "https://www.verbund.com/suppliers"
+    - name: "EVN"
+      sites: ["Dürnrohr"]
+  steel:
+    - name: "voestalpine Stahl Linz"
+      sites: ["Linz"]
+      portal: "https://www.voestalpine.com/supplier/"
+      note: "Крупнейший потребитель flux в AT."
+    - name: "voestalpine Donawitz"
+      sites: ["Donawitz"]
+  cement:
+    - name: "Lafarge Zementwerke (Holcim)"
+      sites: ["Mannersdorf", "Retznei"]
+    - name: "Wopfinger Baustoffindustrie"
+      sites: ["Wopfing"]
+    - name: "Zementwerk Hatschek (Rohrdorfer)"
+      sites: ["Gmunden"]
+  sugar:
+    - name: "Agrana Zucker"
+      sites: ["Tulln", "Leopoldsdorf"]
+
+germany:
+  power:
+    - name: "RWE Power"
+      sites: ["Niederaußem", "Neurath", "Weisweiler"]
+      portal: "https://www.rwe.com/en/suppliers"
+      note: "Лигнитный ТЭК, FGD-sorbent. Проверить фазовый выход из угля."
+    - name: "LEAG"
+      sites: ["Jänschwalde", "Boxberg", "Schwarze Pumpe", "Lippendorf"]
+    - name: "Uniper"
+      sites: ["Datteln 4"]
+  steel:
+    - name: "ThyssenKrupp Steel Europe"
+      sites: ["Duisburg (Schwelgern, Beeckerwerth, Hamborn)"]
+    - name: "Salzgitter AG"
+      sites: ["Salzgitter", "Peine", "Ilsenburg"]
+    - name: "HKM (Hüttenwerke Krupp Mannesmann)"
+      sites: ["Duisburg-Huckingen"]
+    - name: "ArcelorMittal Germany"
+      sites: ["Bremen", "Eisenhüttenstadt", "Hamburg"]
+    - name: "Rogesa (Dillinger / Saarstahl)"
+      sites: ["Dillingen"]
+  cement:
+    - name: "Heidelberg Materials (Group HQ, DE)"
+      sites: ["Lengerich", "Ennigerloh", "Burglengenfeld"]
+    - name: "Holcim Deutschland"
+      sites: ["Lägerdorf", "Beckum-Kollenbach"]
+    - name: "Dyckerhoff"
+      sites: ["Lengerich", "Amöneburg"]
+    - name: "Schwenk Zement"
+      sites: ["Allmendingen", "Mergelstetten", "Karlstadt"]
+  chem:
+    - name: "BASF"
+      sites: ["Ludwigshafen"]
+    - name: "Covestro"
+      sites: ["Dormagen", "Krefeld-Uerdingen"]
+    - name: "Solvay (Rheinberg)"
+      sites: ["Rheinberg"]
+  sugar:
+    - name: "Südzucker"
+      sites: ["Offstein", "Rain am Lech", "Zeitz", "Warburg", "Plattling"]
+      portal: "https://www.suedzucker.de/en/suppliers"
+    - name: "Nordzucker"
+      sites: ["Clauen", "Nordstemmen", "Uelzen"]
+    - name: "Pfeifer & Langen"
+      sites: ["Jülich", "Appeldorn", "Könnern"]
+  glass:
+    - name: "Saint-Gobain Glass Deutschland"
+      sites: ["Herzogenrath", "Stolberg", "Torgau"]
+    - name: "Guardian Glass Deutschland"
+      sites: ["Thalheim"]
+
+serbia:
+  steel:
+    - name: "HBIS Group Serbia (Smederevo)"
+      sites: ["Smederevo"]
+      portal: "https://www.hbis-serbia.rs/suppliers/"
+      note: "Приграничный к ЕС, крупное доменное производство."
+  cement:
+    - name: "Lafarge BFC"
+      sites: ["Beočin"]
+    - name: "Titan Cementara Kosjerić"
+      sites: ["Kosjerić"]
+    - name: "CRH Novi Popovac"
+      sites: ["Popovac"]
+  power:
+    - name: "EPS (Elektroprivreda Srbije)"
+      sites: ["Nikola Tesla A/B", "Kostolac A/B"]
+      portal: "https://www.eps.rs/cir/javne-nabavke"
+
+croatia:
+  cement:
+    - name: "Nexe Grupa"
+      sites: ["Našice"]
+    - name: "CEMEX Hrvatska"
+      sites: ["Sv. Juraj", "Sv. Kajo", "10. kolovoz (Split)"]
+    - name: "Holcim Hrvatska (Koromačno)"
+      sites: ["Koromačno"]
+  power:
+    - name: "HEP Proizvodnja"
+      portal: "https://www.hep.hr/dobavljaci"
+
+bulgaria:
+  power:
+    - name: "TPP Maritsa East 2"
+      sites: ["Radnevo"]
+      note: "Лигнитный, FGD."
+    - name: "ContourGlobal Maritsa East 3"
+      sites: ["Mednikarovo"]
+    - name: "AES Maritsa East 1"
+      sites: ["Galabovo"]
+  cement:
+    - name: "Devnya Cement (Heidelberg Materials Bulgaria)"
+      sites: ["Devnya"]
+    - name: "Holcim Bulgaria"
+      sites: ["Beli Izvor"]
+    - name: "Zlatna Panega Cement (Titan)"
+      sites: ["Zlatna Panega"]
+  chem:
+    - name: "Solvay Sodi"
+      sites: ["Devnya"]
+      note: "Крупнейший в Европе Solvay-процесс, огромный расход известняка."
+  steel:
+    - name: "Stomana Industry (Pernik)"
+      sites: ["Pernik"]
+
+slovenia:
+  cement:
+    - name: "Salonit Anhovo"
+      sites: ["Anhovo"]
+  power:
+    - name: "Termoelektrarna Šoštanj (TEŠ)"
+      sites: ["Šoštanj"]
+      note: "Единственный крупный лигнитный блок в SI (Blok 6)."
+
+bosnia_and_herzegovina:
+  steel:
+    - name: "ArcelorMittal Zenica"
+      sites: ["Zenica"]
+  cement:
+    - name: "Heidelberg Materials Kakanj"
+      sites: ["Kakanj"]
+    - name: "Lafarge Cement BiH"
+      sites: ["Lukavac"]
+  power:
+    - name: "Elektroprivreda BiH"
+      sites: ["Kakanj", "Tuzla"]
+    - name: "Elektroprivreda RS"
+      sites: ["Ugljevik", "Gacko"]
+
+# ВАЖНО: присутствие компании в этом списке НЕ означает, что она прямо
+# сейчас активно закупает известняк, что допускает украинских поставщиков
+# или что логистика к ней экономически оправдана. Это только отправная
+# точка. Проверить каждый пункт по чеклисту из `.claude/agents/limestone-leads.md`.
