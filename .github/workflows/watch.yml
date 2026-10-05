@@ -1,0 +1,56 @@
+name: Daily TED limestone watch
+
+on:
+  schedule:
+    # 06:00 UTC = 08:00 Kyiv (CET-ish year-round after Ukraine's DST change);
+    # TED publishes new notices overnight.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: "How many days back to scan"
+        required: false
+        default: "7"
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: watch
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run limestone watch
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5-5' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '7' }}
+          MAX_NOTICES_PER_RUN: "50"
+        run: python -m scripts.run
+
+      - name: Commit updated state
+        if: always()
+        run: |
+          git config user.name "limestone-watch-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f state.sqlite ]; then
+            git add state.sqlite
+            if ! git diff --cached --quiet; then
+              git commit -m "state: update seen notices [skip ci]"
+              git push
+            else
+              echo "no state change"
+            fi
+          fi

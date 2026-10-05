@@ -1,9 +1,13 @@
-# limestone-leads — B2B research-агент
+# limestone-leads — B2B research-агент + Telegram-бот
 
 Исследовательский агент коммерческой разведки для украинского экспортёра
-известняка. Не новостной агрегатор. Задача — находить реальные
-предприятия в ЕС и соседних странах, которые закупают известняк **и**
-для которых украинский поставщик коммерчески релевантен.
+известняка. Не новостной агрегатор. Задача — находить реальные тендеры
+в ЕС и соседних странах на известняк и присылать по каждому короткий
+бизнес-brief в Telegram.
+
+Два режима работы:
+- **Автомат**: GitHub Actions раз в день → TED API → Claude API → Telegram-канал. См. `docs/deploy.md`.
+- **Интерактив**: `/agents limestone-leads` в сессии Claude Code — для разового поиска/квалификации.
 
 ## Главное правило
 
@@ -17,21 +21,38 @@
 
 ```
 .
-├── .claude/
-│   └── agents/
-│       └── limestone-leads.md       # Сам агент (system prompt + правила)
+├── .claude/agents/limestone-leads.md   # Агент (system prompt + правила)
 ├── docs/
-│   ├── lead-template.md             # Точный формат вывода одного лида
-│   ├── scoring.md                   # Рубрика скоринга 0–100
-│   └── sources.md                   # Приоритетные источники по странам
+│   ├── lead-template.md                # Формат бизнес-brief'а
+│   ├── scoring.md                      # Внутренний скоринг 0–100
+│   ├── sources.md                      # Приоритетные источники по странам
+│   └── deploy.md                       # Как развернуть Telegram-бота
 ├── config/
-│   └── buyers-seed.yaml             # Seed-список крупных покупателей
+│   └── buyers-seed.yaml                # Seed-список крупных покупателей
+├── scripts/
+│   ├── run.py                          # Оркестратор (точка входа)
+│   ├── sources/ted.py                  # Клиент TED API
+│   ├── qualify.py                      # Квалификация через Claude API
+│   ├── telegram.py                     # Отправка в канал
+│   ├── state.py                        # SQLite дедупликация
+│   └── config.py                       # Переменные окружения, константы
+├── .github/workflows/watch.yml         # Cron: daily 06:00 UTC
+├── requirements.txt
 └── README.md
 ```
 
 ## Как использовать
 
-### В Claude Code (CLI или веб)
+### Автоматически — Telegram-бот
+
+Полная пошаговая инструкция: **[`docs/deploy.md`](docs/deploy.md)**.
+
+Коротко: создать Telegram-бот через `@BotFather`, добавить его админом в канал,
+получить ключ Anthropic API, положить `ANTHROPIC_API_KEY`, `TELEGRAM_BOT_TOKEN`
+и `TELEGRAM_CHANNEL_ID` в GitHub Secrets. Workflow сработает по cron'у в 06:00
+UTC и пришлёт в канал по brief'у на каждый подходящий тендер.
+
+### Интерактивно — в Claude Code (CLI или веб)
 
 Открой этот репозиторий в сессии Claude Code и вызови агент:
 
