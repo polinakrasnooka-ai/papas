@@ -23,16 +23,23 @@ SOURCES_DOC_PATH = REPO_ROOT / "docs" / "sources.md"
 LOOKBACK_DAYS = int(os.environ.get("LOOKBACK_DAYS", "7"))
 MAX_NOTICES_PER_RUN = int(os.environ.get("MAX_NOTICES_PER_RUN", "50"))
 
-# Приоритет из Кодымы, Одесская обл.: Дунай-плечо (RO, MD, BG, RS, HR, BA, SI)
+# Приоритет из Кодымы, Одесская обл.: Дунай-плечо (RO, BG, RS, HR, BA, SI)
 # идёт первым, Чоп-плечо (HU, SK) вторым, Польша и Германия — замыкают.
-# Молдова (MD) не в TED (не ЕС); её корпоративные порталы покрываются
-# отдельными источниками.
+# Молдова (MDA) не в TED (не ЕС) — её тендеры собираются отдельно через
+# scripts/sources/moldova.py (mtender.gov.md, achizitii.md).
 PRIORITY_COUNTRIES_ISO3 = [
     "ROU", "BGR", "SRB", "HRV", "BIH", "SVN",
     "HUN", "SVK",
     "POL", "CZE", "AUT", "DEU",
     "MKD", "MNE", "ALB", "XKX",
 ]
+
+# Жёсткое исключение. Эти страны не рассматриваются как покупатели,
+# как транзит, как источник конкурентов для сравнения, и вообще не
+# упоминаются в brief'ах. Основание: санкции ЕС/США/Украины, невозможность
+# коммерческой логистики из UA, этическая/комплаенс-позиция.
+BLOCKED_COUNTRIES_ISO3 = ["RUS", "BLR"]
+BLOCKED_COUNTRIES_HUMAN = ["Россия", "Беларусь", "Приднестровье (ПМР)"]
 
 PRIORITY_CPV = [
     "14212100",

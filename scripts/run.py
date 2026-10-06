@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 
 from scripts.config import GREETING_NAME, STATE_DB_PATH, check_env
 from scripts.qualify import qualify_notice
+from scripts.sources.moldova import sweep_moldova
 from scripts.sources.ted import fetch_recent_notices
 from scripts.state import State
 from scripts.telegram import send_brief, send_text
@@ -62,6 +63,15 @@ def main() -> int:
         except Exception:
             pass
         return 2
+
+    try:
+        md_notices = sweep_moldova()
+    except Exception as e:
+        log.exception("Moldova sweep failed (non-fatal): %s", e)
+        md_notices = []
+    notices = notices + md_notices
+    log.info("sources: ted=%d, moldova=%d, total=%d",
+             len(notices) - len(md_notices), len(md_notices), len(notices))
 
     state = State(STATE_DB_PATH)
     try:
