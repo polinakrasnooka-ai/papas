@@ -24,13 +24,14 @@ from scripts.config import (
     SCORING_PATH,
     GREETING_NAME,
     HOME_BASE,
+    PER_NOTICE_TIMEOUT_S,
 )
 from scripts.sources.ted import Notice
 
 log = logging.getLogger(__name__)
 
-WEB_SEARCH_MAX_USES = 5
-WEB_FETCH_MAX_USES = 10
+WEB_SEARCH_MAX_USES = 2
+WEB_FETCH_MAX_USES = 3
 
 ALLOWED_RESEARCH_DOMAINS = [
     "ted.europa.eu",
@@ -147,11 +148,11 @@ def qualify_notice(notice: Notice) -> tuple[str, str | None]:
         },
     ]
 
-    client = Anthropic(api_key=ANTHROPIC_API_KEY)
+    client = Anthropic(api_key=ANTHROPIC_API_KEY, timeout=PER_NOTICE_TIMEOUT_S)
     try:
         msg = client.messages.create(
             model=ANTHROPIC_MODEL,
-            max_tokens=3000,
+            max_tokens=2000,
             system=system,
             tools=tools,
             messages=[{"role": "user", "content": user}],

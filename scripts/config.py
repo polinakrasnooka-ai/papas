@@ -20,8 +20,10 @@ LEAD_TEMPLATE_PATH = REPO_ROOT / "docs" / "lead-template.md"
 SCORING_PATH = REPO_ROOT / "docs" / "scoring.md"
 SOURCES_DOC_PATH = REPO_ROOT / "docs" / "sources.md"
 
-LOOKBACK_DAYS = int(os.environ.get("LOOKBACK_DAYS", "7"))
-MAX_NOTICES_PER_RUN = int(os.environ.get("MAX_NOTICES_PER_RUN", "50"))
+LOOKBACK_DAYS = int(os.environ.get("LOOKBACK_DAYS", "2"))
+MAX_NOTICES_PER_RUN = int(os.environ.get("MAX_NOTICES_PER_RUN", "15"))
+PER_NOTICE_TIMEOUT_S = int(os.environ.get("PER_NOTICE_TIMEOUT_S", "60"))
+RUN_MAX_SECONDS = int(os.environ.get("RUN_MAX_SECONDS", "900"))  # 15 min hard cap
 
 # Приоритет из Кодымы, Одесская обл.: Дунай-плечо (RO, BG, RS, HR, BA, SI)
 # идёт первым, Чоп-плечо (HU, SK) вторым, Польша и Германия — замыкают.

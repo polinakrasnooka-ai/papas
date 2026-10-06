@@ -15,6 +15,7 @@ on:
 jobs:
   watch:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write
     concurrency:
@@ -38,8 +39,10 @@ jobs:
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           GREETING_NAME: ${{ vars.GREETING_NAME || 'Евгений' }}
           HOME_BASE: ${{ vars.HOME_BASE || 'Кодыма, Одесская обл., Украина' }}
-          LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '7' }}
-          MAX_NOTICES_PER_RUN: "50"
+          LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '2' }}
+          MAX_NOTICES_PER_RUN: ${{ vars.MAX_NOTICES_PER_RUN || '15' }}
+          RUN_MAX_SECONDS: ${{ vars.RUN_MAX_SECONDS || '900' }}
+          PER_NOTICE_TIMEOUT_S: ${{ vars.PER_NOTICE_TIMEOUT_S || '60' }}
         run: python -m scripts.run
 
       - name: Commit updated state

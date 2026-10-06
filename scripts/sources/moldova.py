@@ -19,7 +19,7 @@ import re
 
 from anthropic import Anthropic
 
-from scripts.config import ANTHROPIC_API_KEY, ANTHROPIC_MODEL
+from scripts.config import ANTHROPIC_API_KEY, ANTHROPIC_MODEL, PER_NOTICE_TIMEOUT_S
 from scripts.sources.ted import Notice
 
 log = logging.getLogger(__name__)
@@ -51,25 +51,25 @@ def sweep_moldova() -> list[Notice]:
         log.warning("ANTHROPIC_API_KEY unset; skipping Moldova sweep")
         return []
 
-    client = Anthropic(api_key=ANTHROPIC_API_KEY)
+    client = Anthropic(api_key=ANTHROPIC_API_KEY, timeout=PER_NOTICE_TIMEOUT_S)
     tools = [
         {
             "type": "web_search_20260209",
             "name": "web_search",
-            "max_uses": 5,
+            "max_uses": 2,
             "allowed_domains": MOLDOVA_SOURCES + ["google.com"],
         },
         {
             "type": "web_fetch_20260209",
             "name": "web_fetch",
-            "max_uses": 8,
+            "max_uses": 3,
         },
     ]
 
     try:
         msg = client.messages.create(
             model=ANTHROPIC_MODEL,
-            max_tokens=1500,
+            max_tokens=1000,
             tools=tools,
             messages=[{"role": "user", "content": PROMPT}],
         )

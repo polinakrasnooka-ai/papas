@@ -14,7 +14,7 @@ import sys
 import time
 from datetime import datetime, timezone
 
-from scripts.config import GREETING_NAME, STATE_DB_PATH, check_env
+from scripts.config import GREETING_NAME, STATE_DB_PATH, RUN_MAX_SECONDS, check_env
 from scripts.qualify import qualify_notice
 from scripts.sources.moldova import sweep_moldova
 from scripts.sources.ted import fetch_recent_notices
@@ -83,8 +83,16 @@ def main() -> int:
             return 0
 
         briefs: list[tuple[str, str]] = []
-        skipped = errors = 0
+        skipped = errors = aborted = 0
+        start_ts = time.time()
         for n in new_notices:
+            if time.time() - start_ts > RUN_MAX_SECONDS:
+                aborted = len(new_notices) - (len(briefs) + skipped + errors)
+                log.warning(
+                    "run cap %ds reached, aborting after %d/%d notices",
+                    RUN_MAX_SECONDS, len(briefs) + skipped + errors, len(new_notices),
+                )
+                break
             outcome, brief = qualify_notice(n)
             if outcome == "post" and brief:
                 briefs.append((n.id, brief))
@@ -119,8 +127,8 @@ def main() -> int:
             time.sleep(1)
 
         log.info(
-            "run summary: posted=%d skipped=%d errors=%d new=%d",
-            posted, skipped, errors, len(new_notices),
+            "run summary: posted=%d skipped=%d errors=%d aborted=%d new=%d",
+            posted, skipped, errors, aborted, len(new_notices),
         )
     finally:
         state.close()
