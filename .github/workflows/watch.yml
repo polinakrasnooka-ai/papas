@@ -36,6 +36,8 @@ jobs:
           ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5-5' }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          GREETING_NAME: ${{ vars.GREETING_NAME || 'Евгений' }}
+          HOME_BASE: ${{ vars.HOME_BASE || 'Кодыма, Одесская обл., Украина' }}
           LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '7' }}
           MAX_NOTICES_PER_RUN: "50"
         run: python -m scripts.run

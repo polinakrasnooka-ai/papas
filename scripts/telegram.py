@@ -1,4 +1,4 @@
-"""Telegram sender — posts one brief to the configured channel.
+"""Telegram sender — posts briefs and status messages to the configured channel.
 
 Uses Markdown (v1) parse mode because the brief format in docs/lead-template.md
 uses *bold*, [text](url), bullet lists, which Telegram's loosest Markdown
@@ -15,6 +15,11 @@ from scripts.config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHANNEL_ID
 log = logging.getLogger(__name__)
 
 TG_MAX_LEN = 4000  # leave headroom under hard 4096 limit
+
+
+def send_text(text: str) -> None:
+    """Send a plain status/greeting message (short, single chunk expected)."""
+    send_brief(text)
 
 
 def send_brief(text: str) -> None:

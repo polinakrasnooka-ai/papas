@@ -45,8 +45,16 @@ curl -s "https://api.telegram.org/bot$TOKEN/sendMessage" \
 
 1. Открой https://console.anthropic.com/settings/keys
 2. **Create Key** → назови `limestone-leads` → скопируй ключ `sk-ant-api03-…`
-3. Положи $5–10 на баланс (https://console.anthropic.com/settings/billing)
-4. Прикинь, что Sonnet 5.5: ~$3 / 1M input, ~$15 / 1M output. Один brief ≈ 2000 input + 500 output = $0.014. 50 новых тендеров в день = $0.70/день = $21/мес максимум. Реально будет в 5–10 раз меньше, потому что большинство попадёт в SKIP.
+3. Положи $10–20 на баланс (https://console.anthropic.com/settings/billing)
+4. Стоимость с включёнными `web_search` + `web_fetch` (бот открывает TED notice,
+   SIWZ, supplier portal, LinkedIn X-Ray):
+   - Sonnet 5.5 ($2/$10 per 1M tokens): один тендер ≈ $0.02–0.05 (включая 2–5 web_fetch)
+   - Opus 4.7 ($5/$20): один тендер ≈ $0.05–0.15
+   - Opus 5.5 ($4/$20): один тендер ≈ $0.04–0.12
+   - 20 новых тендеров/день × $0.03 = $0.60/день ≈ **$18/мес** на Sonnet
+   - На Opus — ×3, т.е. ~$50/мес
+   - Большинство тендеров отфильтруется через SKIP до того, как потратят много
+     токенов — реальная цифра обычно в 2–3 раза ниже оценки
 
 ## 3. Положить секреты в GitHub
 
@@ -57,7 +65,11 @@ curl -s "https://api.telegram.org/bot$TOKEN/sendMessage" \
    - `TELEGRAM_CHANNEL_ID` = `-1001234567890` или `@your_channel_name`
 
 Опционально через Variables (не Secrets):
-- `ANTHROPIC_MODEL` = `claude-sonnet-5-5` (по умолчанию) или `claude-opus-5-5` для качества
+- `ANTHROPIC_MODEL` = `claude-sonnet-5-5` (по умолчанию, дёшево) или
+  `claude-opus-4-7` / `claude-opus-5-5` для максимального качества (×3–5 к стоимости)
+- `GREETING_NAME` = имя получателя (по умолчанию `Евгений`)
+- `HOME_BASE` = база отгрузки (по умолчанию `Кодыма, Одесская обл., Украина`)
+  — агент считает логистику ИЗ этой точки, не из абстрактной Украины
 
 ## 4. Включить workflow
 

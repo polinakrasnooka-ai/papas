@@ -10,6 +10,9 @@ ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5")
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHANNEL_ID = os.environ.get("TELEGRAM_CHANNEL_ID")
 
+GREETING_NAME = os.environ.get("GREETING_NAME", "Евгений")
+HOME_BASE = os.environ.get("HOME_BASE", "Кодыма, Одесская обл., Украина")
+
 STATE_DB_PATH = REPO_ROOT / "state.sqlite"
 
 AGENT_PROMPT_PATH = REPO_ROOT / ".claude" / "agents" / "limestone-leads.md"
@@ -20,9 +23,15 @@ SOURCES_DOC_PATH = REPO_ROOT / "docs" / "sources.md"
 LOOKBACK_DAYS = int(os.environ.get("LOOKBACK_DAYS", "7"))
 MAX_NOTICES_PER_RUN = int(os.environ.get("MAX_NOTICES_PER_RUN", "50"))
 
+# Приоритет из Кодымы, Одесская обл.: Дунай-плечо (RO, MD, BG, RS, HR, BA, SI)
+# идёт первым, Чоп-плечо (HU, SK) вторым, Польша и Германия — замыкают.
+# Молдова (MD) не в TED (не ЕС); её корпоративные порталы покрываются
+# отдельными источниками.
 PRIORITY_COUNTRIES_ISO3 = [
-    "POL", "ROU", "SVK", "HUN", "MDA", "CZE", "AUT", "DEU",
-    "SRB", "HRV", "BGR", "SVN", "BIH", "MKD", "MNE", "ALB", "XKX",
+    "ROU", "BGR", "SRB", "HRV", "BIH", "SVN",
+    "HUN", "SVK",
+    "POL", "CZE", "AUT", "DEU",
+    "MKD", "MNE", "ALB", "XKX",
 ]
 
 PRIORITY_CPV = [
