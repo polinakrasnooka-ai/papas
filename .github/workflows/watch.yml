@@ -1,16 +1,19 @@
 name: Daily TED limestone watch
 
 on:
-  schedule:
-    # 06:00 UTC = 08:00 Kyiv (CET-ish year-round after Ukraine's DST change);
-    # TED publishes new notices overnight.
-    - cron: "0 6 * * *"
+  # Автозапуск по cron отключён — бот сработает только если явно нажать
+  # "Run workflow" в GitHub UI. Чтобы включить обратно: раскомментируй
+  # блок schedule ниже.
+  #
+  # schedule:
+  #   - cron: "0 6 * * *"  # 06:00 UTC = 09:00 Kyiv
+
   workflow_dispatch:
     inputs:
       lookback_days:
         description: "How many days back to scan"
         required: false
-        default: "7"
+        default: "2"
 
 jobs:
   watch:
